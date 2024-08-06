@@ -1,0 +1,32 @@
+1. Why Query, Key and Value ?
+
+- The key/value/query concept is analogous to retrieval systems. 
+
+- For example, when you search for videos on Netflix, the search engine maps your query (text in the search bar) against a set of keys (video title, description, etc.) associated with candidate videos in their database, then present you the best matched videos (values).
+
+- Example: when we search "Love Movies", it goes to genres dictionary and emphasizes Keys "Romantic" at 88%, "Comedy" at 10% and others at 2%.
+Then in "Romantic", Values are "Titanic" at 30%, "Emily in Paris" at 20%, ... based on plenty of criteria.
+
+
+
+2. Why don't we just use embedded inputs as Queries, Keys and Values but we need to go through a Linear Layer?
+
+- For the sake of pattern extracting, a Linear Layer transforms inputs into matrices of unique mapping. So Key, Query and Value matrices are unique from each other. After that it is ready for Attention!
+
+
+3. Why do we need to causally mask attention scores before dotting it with Value matrix?
+
+- We want the first M tokens to predict token at M+1 position without seeing M+2 and later positions.
+
+- Example: In the sentence "I am Bill"
+   -> Only the score of 'I' and 'I' (itself) is involved in predicting 'am'. Thus, 'am' is not involved in the prediction of itself, sounds ridiculous huh:)
+
+   -> Similarly, score('I', 'am') and score('am', 'am') altogether prepare materials for the prediction of 'Bill'.
+
+- Why I say that, because when training models, Input is ['I', 'am', 'Bill'] and output should be ['am', 'Bill', 'Gates'] 
+
+
+4. My model has too much parameter, can I reduce some so training is faster?
+
+- Of course, if your model inputs use the same tokenizer, it is recommended (gpt-2) to share token embedding matrix and the last linear matrix (they are transpose of each other). In most cases, embedding takes up a lot of memory spaces.
+ 
