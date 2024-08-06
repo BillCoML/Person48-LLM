@@ -30,5 +30,5 @@ Then in "Romantic", Values are "Titanic" at 30%, "Emily in Paris" at 20%, ... ba
 
 - Of course, if your model inputs use the same tokenizer, it is recommended (gpt-2) to share token embedding matrix and the last linear matrix (they are transpose of each other). In most cases, embedding takes up a lot of memory spaces.
 
-5. Removed 
+5. Hi this is main
  
